@@ -90,3 +90,26 @@ export const Button = styled.button`
     }
   `}
 `;
+
+export const LoadingSpinner = styled.div`
+  margin-top: 10px;
+  font-size: 14px;
+  color: #888;
+`;
+
+export const ErrorMessage = styled.div`
+  margin-top: 10px;
+  color: red;
+  font-size: 14px;
+`;
+
+export const ResultsList = styled.ul`
+  margin-top: 20px;
+  list-style: none;
+  padding: 0;
+
+  li {
+    padding: 8px 0;
+    border-bottom: 3px solid #ddd;
+  }
+`;

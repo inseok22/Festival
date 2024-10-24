@@ -1,15 +1,15 @@
 import React, { useState } from "react";
 import axios from 'axios';
-import { SearchWrapper, SearchInput, SearchIcon, Button } from "../styles/SearchSt";
+import { useNavigate } from 'react-router-dom'; // React Router의 useNavigate 훅 사용
+import { SearchWrapper, SearchInput, SearchIcon, Button, ErrorMessage, LoadingSpinner } from "../styles/SearchSt"; // 필요한 스타일 추가
 
 const SearchBar = () => {
   const [searchQuery, setSearchQuery] = useState("");
-  const [searchResults, setSearchResults] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  const navigate = useNavigate();
 
   const handleSearch = async () => {
-    // 검색어 유효성 검사
     if (searchQuery.trim() === "") {
       setError("검색어를 입력해주세요.");
       return;
@@ -24,9 +24,9 @@ const SearchBar = () => {
     setError(null);
 
     try {
-      // 백엔드 API 호출
       const response = await axios.get(`/api/festivals?query=${searchQuery}`);
-      setSearchResults(response.data);
+      // 검색 결과와 검색어를 상태로 전달하여 '/list'로 리다이렉트
+      navigate('/list', { state: { results: response.data, query: searchQuery } });
     } catch (err) {
       console.error(err);
       setError("검색 결과를 불러오는 중 오류가 발생했습니다.");
@@ -37,9 +37,20 @@ const SearchBar = () => {
 
   return (
     <SearchWrapper>
-      <SearchInput type="text" placeholder="축제 검색..." value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} />
+      <SearchInput 
+        type="text" 
+        placeholder="축제 검색..." 
+        value={searchQuery} 
+        onChange={(e) => setSearchQuery(e.target.value)} 
+      />
       <SearchIcon size={20} />
       <Button onClick={handleSearch}>검색</Button>
+
+      {/* 로딩 상태를 나타내기 */}
+      {loading && <LoadingSpinner>검색 중...</LoadingSpinner>}
+
+      {/* 오류 메시지를 나타내기 */}
+      {error && <ErrorMessage>{error}</ErrorMessage>}
     </SearchWrapper>
   );
 };

@@ -56,7 +56,7 @@ const Hotlist = () => {
                 onClick={() => openModal(festival, index)}
               >
                 <CardContent>
-                  <img src="./AppleFesta.jpeg" style={{ width: '200px', height: '150px' }}/>
+                  <img src="./AppleFesta.jpeg" style={{ width: '200px', height: '150px' }} alt='AppleImage' />
                   <h3 style={{ fontWeight: 'bold', fontSize: '1.125rem', marginBottom: '0.5rem' }}>{festival.name}</h3>
                   <p style={{ fontSize: '0.875rem', color: '#6b7280' }}>{festival.date}</p>
                 </CardContent>
