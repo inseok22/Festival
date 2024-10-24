@@ -20,12 +20,12 @@ jobs:
           submodules: true
           lfs: false
       
-      - name: Install dependencies  # 의존성 설치
+      - name: Install dependencies
         run: |
           cd frontend
           npm install
       
-      - name: Build React app without stopping on warnings  # 경고 무시하고 빌드
+      - name: Build React app without stopping on warnings
         run: |
           cd frontend
           CI=false npm run build
@@ -34,8 +34,8 @@ jobs:
         id: builddeploy
         uses: Azure/static-web-apps-deploy@v1
         with:
-          azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_AMBITIOUS_RIVER_00FC37A00 }}
-          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_MANGO_FOREST_0AEAF0E00 }}
+          repo_token: ${{ secrets.GITHUB_TOKEN }} # Used for Github integrations (i.e. PR comments)
           action: "upload"
           app_location: "./frontend" # App source code path
           api_location: "" # Api source code path - optional
@@ -50,5 +50,5 @@ jobs:
         id: closepullrequest
         uses: Azure/static-web-apps-deploy@v1
         with:
-          azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_AMBITIOUS_RIVER_00FC37A00 }}
+          azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_MANGO_FOREST_0AEAF0E00 }}
           action: "close"
